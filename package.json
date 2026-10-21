@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "test": "mocha",
-    "test-browser": "karma start karma.conf.js"
+    "test-browser": "karma start karma.conf.js",
+    "test:node24": "node --test test-node24/legacy-crypto.test.js"
   },
   "main": "index.js",
   "version": "0.4.0",
