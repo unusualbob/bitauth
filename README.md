@@ -45,6 +45,23 @@ It then computes the SIN from the public key, and sees whether that SIN has acce
 to the requested resource. The nonce is checked to make sure it is higher than
 the previously used nonce.
 
+## Signature verification
+
+`bitauth.verifySignature(data, pubkey, signature[, callback])` uses the default
+verifier. In Node.js it requires strict DER encoding and continues to normalize
+high-S signatures before verification.
+
+`bitauth.verifySignatureLax(data, pubkey, signature[, callback])` explicitly uses
+permissive legacy DER decoding, including redundant integer padding, long-form
+lengths and trailing bytes. It still verifies the signature against the message
+and public key. Legacy decoding is limited to 1,024 bytes. This should not be used
+for most implementations.
+
+Both methods accept a string or Buffer for data, a hex string or Buffer for the
+public key and signature, and return a boolean. If supplied, the callback receives
+`(null, valid)` instead. Malformed encodings or invalid keys can throw synchronously,
+including when a callback is supplied.
+
 ## Technology is readily available
 
 With the growing popularity of Bitcoin, there are already libraries written in
